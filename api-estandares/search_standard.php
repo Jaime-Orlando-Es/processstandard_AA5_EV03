@@ -1,21 +1,22 @@
 <?php
 // search_standard.php
+// Servicio para buscar estándares en la tabla 'standards' según los parámetros enviados
 
-// Include database connection
+// Incluir archivo de conexión a la base de datos
 require_once 'config.php';
 
-// Check if it's a GET request
+// Verificar que la solicitud sea de tipo GET
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Get query parameters
+    // Obtener parámetros de búsqueda
     $machine = $_GET['machine'] ?? '';
     $reference = $_GET['reference'] ?? '';
 
     try {
-        // Build base SQL query
+        // Construir consulta SQL base
         $sql = "SELECT * FROM standards WHERE 1=1";
         $params = [];
 
-        // Add conditions dynamically based on input
+        // Agregar condiciones si hay valores ingresados
         if (!empty($machine)) {
             $sql .= " AND machine LIKE ?";
             $params[] = "%$machine%";
@@ -26,17 +27,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $params[] = "%$reference%";
         }
 
-        // Prepare and execute query
+        // Preparar y ejecutar la consulta
         $stmt = $conexion->prepare($sql);
         $stmt->execute($params);
 
-        // Fetch and return results
+        // Obtener y retornar los resultados en formato JSON
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($results);
+
     } catch (PDOException $e) {
-        echo json_encode(['error' => '❌ Error searching standards: ' . $e->getMessage()]);
+        // Manejo de errores
+        echo json_encode(['error' => '❌ Error al buscar estándares: ' . $e->getMessage()]);
     }
 } else {
-    echo json_encode(['error' => '❌ Only GET method is allowed']);
+    // Método no permitido
+    echo json_encode(['error' => '❌ Solo se permite el método GET']);
 }
 ?>

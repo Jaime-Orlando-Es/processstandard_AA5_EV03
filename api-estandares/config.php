@@ -1,23 +1,25 @@
 <?php
 // config.php
+// ✅ Configuración de conexión a base de datos con PDO (MAMP)
 
-// Database connection parameters
+// Parámetros de conexión a la base de datos
 $host = '127.0.0.1';
-$port = 8889; // Default MAMP MySQL port
-$db   = 'api_usuarios'; // Replace with your actual database name if different
+$port = 8889; // Puerto por defecto de MySQL en MAMP
+$db   = 'api_usuarios'; // Nombre de la base de datos
 $user = 'root';
-$pass = 'JE5628'; // Replace with your actual password
+$pass = 'JE5628'; // Contraseña
 
 try {
-    // Create PDO connection
+    // Crear conexión PDO
     $conexion = new PDO("mysql:host=$host;port=$port;dbname=$db", $user, $pass);
 
-    // Set error mode to exceptions
+    // Activar el modo de errores por excepción
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // echo "✅ Connection established successfully";
+    // Conexión exitosa (comentado por defecto)
+    // echo "✅ Conexión establecida correctamente";
 } catch (PDOException $e) {
-    // Show error if connection fails
-    die("❌ Connection error: " . $e->getMessage());
+    // Manejo de error si la conexión falla
+    die("❌ Error de conexión: " . $e->getMessage());
 }
 ?>

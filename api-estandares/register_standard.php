@@ -1,31 +1,34 @@
 <?php
 // register_standard.php
+// Servicio para registrar un nuevo estándar en la tabla 'standards'
 
-// Include database connection
+// Incluir archivo de conexión a la base de datos
 require_once 'config.php';
 
-// Check if it's a POST request
+// Verificar que la solicitud sea POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get input values from POST
+    // Obtener valores desde la solicitud
     $machine = $_POST['machine'] ?? '';
     $reference = $_POST['reference'] ?? '';
 
-    // Validate input
+    // Validar que los campos no estén vacíos
     if (empty($machine) || empty($reference)) {
-        echo json_encode(['error' => '⚠️ Machine and reference are required']);
+        echo json_encode(['error' => '⚠️ Los campos "machine" y "reference" son obligatorios']);
         exit;
     }
 
     try {
-        // Prepare insert statement
+        // Preparar y ejecutar la inserción del nuevo registro
         $stmt = $conexion->prepare("INSERT INTO standards (machine, reference) VALUES (?, ?)");
         $stmt->execute([$machine, $reference]);
 
-        echo json_encode(['message' => '✅ Standard registered successfully']);
+        echo json_encode(['message' => '✅ Estándar registrado correctamente']);
     } catch (PDOException $e) {
-        echo json_encode(['error' => '❌ Error registering standard: ' . $e->getMessage()]);
+        // Manejo de errores de base de datos
+        echo json_encode(['error' => '❌ Error al registrar el estándar: ' . $e->getMessage()]);
     }
 } else {
-    echo json_encode(['error' => '❌ Only POST method is allowed']);
+    // Solicitud inválida
+    echo json_encode(['error' => '❌ Solo se permite el método POST']);
 }
 ?>

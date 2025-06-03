@@ -1,10 +1,11 @@
 <?php
 // config.php
+// Configuración de conexión a la base de datos process_standard (MAMP - Mac)
 
-// Conexión usando socket de MAMP (recomendado en Mac)
-$dsn = 'mysql:host=localhost;dbname=api_usuarios;port=8889;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock';
+// Conexión usando socket de MAMP
+$dsn = 'mysql:host=localhost;dbname=process_standard;port=8889;unix_socket=/Applications/MAMP/tmp/mysql/mysql.sock';
 $user = 'root';
-$pass = 'JE5628';
+$pass = 'JE5628'; // contraseña
 
 try {
     // Crear conexión PDO

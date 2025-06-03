@@ -1,19 +1,22 @@
 <?php
 // get_standards.php
+// Servicio para consultar todos los registros de la tabla 'standards'
 
-// Include database connection
+// Incluir archivo de conexión a la base de datos
 require_once 'config.php';
 
 try {
-    // Prepare and execute the query to retrieve all standards
+    // Ejecutar la consulta SQL para obtener todos los estándares
     $stmt = $conexion->query("SELECT * FROM standards");
 
-    // Fetch all records as an associative array
+    // Obtener resultados como arreglo asociativo
     $standards = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Return the data in JSON format
+    // Retornar los datos en formato JSON
     echo json_encode($standards);
+
 } catch (PDOException $e) {
-    echo json_encode(['error' => '❌ Error retrieving standards: ' . $e->getMessage()]);
+    // Manejo de errores en la base de datos
+    echo json_encode(['error' => '❌ Error al obtener los estándares: ' . $e->getMessage()]);
 }
 ?>
