@@ -1,11 +1,11 @@
 <?php
 // config.php
-// ✅ Configuración de conexión a base de datos con PDO (MAMP)
+// Configuración de conexión a base de datos con PDO (MAMP)
 
 // Parámetros de conexión a la base de datos
 $host = '127.0.0.1';
 $port = 8889; // Puerto por defecto de MySQL en MAMP
-$db   = 'api_usuarios'; // Nombre de la base de datos
+$db   = 'process_standard'; // Nombre de la base de datos
 $user = 'root';
 $pass = 'JE5628'; // Contraseña
 
