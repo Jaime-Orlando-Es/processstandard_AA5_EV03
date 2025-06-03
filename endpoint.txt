@@ -1,0 +1,26 @@
+# ENDPOINTS - API Process Standard
+
+1. [POST] /api/login
+   - Descripción: Autenticación de usuario.
+   - Parámetros: usuario (string), contrasena (string)
+   - Respuesta: JSON con mensaje de éxito o error.
+
+2. [POST] /api/register
+   - Descripción: Registro de nuevo usuario.
+   - Parámetros: nombre, area, usuario, contrasena
+   - Respuesta: JSON con confirmación de registro.
+
+3. [GET] /api/standards
+   - Descripción: Obtener todos los estándares registrados.
+   - Parámetros: Ninguno
+   - Respuesta: JSON con todos los registros de la tabla PS_estandar.
+
+4. [POST] /api/standards
+   - Descripción: Registrar nuevo estándar.
+   - Parámetros: Todos los campos requeridos del estándar (como nombre_estandar, maquina, referencia, etc.)
+   - Respuesta: JSON con confirmación de registro.
+
+5. [GET] /api/standards/:id
+   - Descripción: Obtener un estándar por ID.
+   - Parámetros: ID del estándar.
+   - Respuesta: JSON con los datos del estándar.
